@@ -17,6 +17,9 @@ int main(int argc, char *argv[], char *env[])
 	pid_t child;
 	struct stat st;
 
+	if (argc == 0)
+		return (-1);
+
 	printf("$ ");
 	while ((nread = getline(&lineptr, &len, stdin) != EOF))
 	{
@@ -31,14 +34,12 @@ int main(int argc, char *argv[], char *env[])
 			if (child == 0)
 			{
 				_argv[0] = lineptr;
-			       	_argv[1] = NULL;
+				_argv[1] = NULL;
 
 				execve(_argv[0], _argv, env);
 			}
 			else
-			{
 				wait(&status);
-			}
 		}
 		else
 		{
@@ -47,5 +48,5 @@ int main(int argc, char *argv[], char *env[])
 		printf("$ ");
 	}
 	free(lineptr);
-	return (argc);
+	return (1);
 }
