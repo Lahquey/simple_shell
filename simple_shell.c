@@ -10,12 +10,11 @@
  */
 int main(int argc, char *argv[], char *env[])
 {
-	char *lineptr = NULL;
-	int str_count;
+	char *lineptr = NULL, *_argv[2];
+	int str_count, status;
 	size_t len = 0;
 	ssize_t nread;
 	pid_t child;
-	int status;
 	struct stat st;
 
 	printf("$ ");
@@ -31,7 +30,8 @@ int main(int argc, char *argv[], char *env[])
 				return (-1);
 			if (child == 0)
 			{
-				char *_argv[] = {lineptr, NULL};
+				_argv[0] = lineptr;
+			       	_argv[1] = NULL;
 
 				execve(_argv[0], _argv, env);
 			}
@@ -47,5 +47,5 @@ int main(int argc, char *argv[], char *env[])
 		printf("$ ");
 	}
 	free(lineptr);
-	return (1);
+	return (argc);
 }
