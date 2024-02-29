@@ -20,12 +20,12 @@ int main(int argc, char *argv[], char *env[])
 	if (argc == 0)
 		return (-1);
 
-	printf("$ ");
+	if (isatty(STDIN_FILENO))
+		printf("$ ");
 	while ((nread = getline(&lineptr, &len, stdin) != EOF))
 	{
 		str_count = strlen(lineptr);
 		lineptr[str_count - 1] = '\0';
-
 		if (stat(lineptr, &st) == 0)
 		{
 			child = fork();
