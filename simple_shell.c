@@ -8,8 +8,9 @@
  *
  * Return: 1 on success and -1 on failure
  */
-int main(int argc, char *argv[], char *env[])
+int main(int argc, char *argv[])
 {
+	extern char **environ;
 	char *lineptr = NULL, *_argv[2];
 	int str_count, status;
 	size_t len = 0;
@@ -36,7 +37,7 @@ int main(int argc, char *argv[], char *env[])
 				_argv[0] = lineptr;
 				_argv[1] = NULL;
 
-				execve(_argv[0], _argv, env);
+				execve(_argv[0], _argv, environ);
 			}
 			else
 				wait(&status);
