@@ -6,9 +6,9 @@
  * @argv: list of arguments
  * @env: environment variables
  *
- * Return: 1 on success and -1 on failure
+ * Return: 0 on success and -1 on failure
  */
-int main(int argc, char *argv[])
+int main(int argc, char *argv[], char *env[])
 {
 	char *lineptr = NULL, *_argv[2];
 	int str_count, status;
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 				_argv[0] = lineptr;
 				_argv[1] = NULL;
 
-				execve(_argv[0], _argv, NULL);
+				execve(_argv[0], _argv, env);
 			}
 			else
 				wait(&status);
@@ -48,5 +48,5 @@ int main(int argc, char *argv[])
 		printf("$ ");
 	}
 	free(lineptr);
-	return (1);
+	return (0);
 }
