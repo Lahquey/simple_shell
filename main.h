@@ -10,5 +10,6 @@
 #include <string.h>
 
 int main(int argc, char *argv[], char *env[]);
+int execute_command(char *lineptr, char *argv[], char *env[]);
 
 #endif
