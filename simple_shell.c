@@ -35,17 +35,18 @@ int main(int argc, char *argv[], char *env[])
 			{
 				_argv[0] = lineptr;
 				_argv[1] = NULL;
-
 				execve(_argv[0], _argv, env);
 			}
 			else
 				wait(&status);
 		}
 		else
-		{
 			printf("%s: No such file or directory.\n", argv[0]);
-		}
-		printf("$ ");
+
+		if (isatty(STDIN_FILENO))
+			printf("$ ");
+		else
+			break;
 	}
 	free(lineptr);
 	return (0);
