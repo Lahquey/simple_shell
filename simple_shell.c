@@ -66,8 +66,8 @@ int main(int argc, char *argv[], char *env[])
 	}
 	else
 	{
-		nread = getline(&lineptr, &len, stdin);
-		execute_command(lineptr, argv, env);
+		while ((nread = getline(&lineptr, &len, stdin) != EOF))
+			execute_command(lineptr, argv, env);
 	}
 	free(lineptr);
 	return (0);
